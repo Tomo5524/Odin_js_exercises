@@ -1,0 +1,41 @@
+body{
+    background-color: cornflowerblue;
+}
+
+.container{
+    
+    width: 750px;
+    margin: 0 auto;
+    
+}
+
+.menu{
+    display:inline-block;
+    padding: 0 10px;
+}
+
+#reset{
+    margin: 10px;
+}
+
+div {
+    display: block;
+    width:auto;
+}
+
+.col{
+    display: inline-block;
+    text-align:center;
+    background-color: chocolate;
+    color:black;
+    
+}
+
+.row{
+    width: auto;
+    
+    background-color: cornflowerblue;
+    color:black;
+    
+}
+
