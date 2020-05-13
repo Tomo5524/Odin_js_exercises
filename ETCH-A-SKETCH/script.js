@@ -8,8 +8,13 @@ const p = document.createElement('p');
 p.textContent = 'meow'
 div.appendChild(p);*/
 
-let w = 750;
-let h = 750;
+let w = 500;
+let h = 960;
+let body_height = document.querySelector('.menu');
+// how to get height menu div
+// needs this as bottom of cotainer is out of body 
+// to fix this, h - menu's height,
+//body_height = body_height.clientHeight.toFixed(2);
 
 // creates button to get grid input 
 const dropMenu = document.querySelector('#select');
@@ -29,7 +34,9 @@ getValueDropmenu()
 
 function createGrid(grid){
     let each_width = w / grid;
-    let each_height = h / grid;
+    let each_height = (h) / grid;
+    console.log(each_height)
+    opacity_flag = false;
     // console.log(each_width);
 
     for(let i = 0; i < grid; i++){
@@ -37,11 +44,11 @@ function createGrid(grid){
 
         // solution was to get rid of row
         row.classList.add('row')
-
+        // without this, there is a space between each row
+        row.style.height = `${each_height}px`;
         //row.textContent = 'row';
         //row.style.color = 'magenta'
         const g = document.querySelector('.container')
-        
         // row takes only 151 px
         // row.style.width = `${each_width}px`;
 
@@ -53,7 +60,6 @@ function createGrid(grid){
             // assign each column width and height
             col.style.width = `${each_width}px`;
             col.style.height = `${each_height}px`;
-
             //col.style.color = 'magenta';
             
             row.appendChild(col);
@@ -65,23 +71,40 @@ function createGrid(grid){
     for (let i = 0; i < each_col.length; i++){
         each_col[i].addEventListener('mouseover', (e) => {
             // how to change backgroudn color 
-            each_col[i].style.backgroundColor = '#225906';
+            // throw opacity here
+            if (opacity_flag){
+                each_col[i].style.opacity = 0.1;
+            } else{
+                each_col[i].style.backgroundColor = '#225906';
+            }
         });
     }
 
     const reset = document.querySelector('#reset');
     // console.log('meow')
     // console.log(reset)
-    
+    const each_row = document.querySelectorAll('.row');
     reset.addEventListener('click',(e) => {
         // value is connected with value attribute in html
         //console.log(e);
         // iterate each cell
+        for (let i = 0; i < each_row.length; i++){
+            // remove each row node 
+            each_row[i].remove()
+        }
         for (let i = 0; i < each_col.length; i++){
-            // remove each node 
+            // remove each column node 
             each_col[i].remove()
         }
     });
+
+    const opacity = document.querySelector('#opacity');
+    // console.log('meow')
+    // console.log(reset)
+    opacity.addEventListener('click',(e) => {
+            opacity_flag = (opacity_flag) ? false : true;
+        });
+    
     
     /*
     const reset = document.querySelector('#reset');
@@ -89,7 +112,7 @@ function createGrid(grid){
     console.log(reset)
     // how to get value of drowdown
     reset.addEventListener('click',(e) => {
-        // value is connected with value attribute in html
+       
         console.log(e);
         // Uncaught TypeError: each_col.remove is not a function
         // at HTMLButtonElement.<anonymous> (script.js:81)
@@ -103,10 +126,14 @@ function createGrid(grid){
     
 }
 
+// grid should not change dynamically 
 // back ground and let users pick a color 
 // how to reset grid by choosing grid number
 // background pictuer 
 // cell color is transparent so it will reveal what background is 
+// opacity
+// keep grid in body
+// resize background image
 
 
 // how to reset grid when reset button is clicked
