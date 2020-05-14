@@ -9,33 +9,74 @@ p.textContent = 'meow'
 div.appendChild(p);*/
 
 let w = 500;
-let h = 960;
+let h = 500;
 let body_height = document.querySelector('.menu');
 // how to get height menu div
 // needs this as bottom of cotainer is out of body 
 // to fix this, h - menu's height,
-//body_height = body_height.clientHeight.toFixed(2);
+// body_height = body_height.clientHeight.toFixed(2);
 
 // creates button to get grid input 
 const dropMenu = document.querySelector('#select');
+const color = document.querySelector('#color');
+let grid_flag = false;
+let grid = 0;
+// let each_width = w / grid;
+// let each_height = h / grid;
+// console.log(each_height)
+let opacity_flag = false;
+const container = document.querySelector('.container')
+const row = document.createElement('div');
+const col = document.createElement('div');
+let selectedColor = null;
+
 // how to get value of drowdown
-function getValueDropmenu() {
-    dropMenu.addEventListener('change',(e) => {
-        // value is connected with value attribute in html
-        //console.log(e.target.value);
-        createGrid(e.target.value);
-    });
+//function getValueDropmenu() {
+dropMenu.addEventListener('change',(e) => {
+    // value is connected with value attribute in html
+    //console.log(e.target.value);
+    if (grid_flag){
+        removeGrid(e.target.value);
+    }
+    grid_flag = (grid_flag) ? false : true;
+    grid = e.target.value
+    createGrid(grid)
+    //createGrid(e.target.value);
+});
+//}
+
+color.addEventListener('click',(e) => {
+    selectedColor = prompt('what color would you like?')
+    console.log(selectedColor)
+    
+});
+
+function removeGrid(grid){
+    const each_row = document.querySelectorAll('.row');
+    const each_col = document.querySelectorAll('.row');
+    // value is connected with value attribute in html
+    //console.log(e);
+    // iterate each cell
+    for (let i = 0; i < each_row.length; i++){
+        // remove each row node 
+        each_row[i].remove()
+    }
+    for (let i = 0; i < each_col.length; i++){
+        // remove each column node 
+        each_col[i].remove()
+    }
+
 }
 
-getValueDropmenu()
+// getValueDropmenu()
 
 //const num_grid = dropMenu.options[dropMenu.selectedIndex].value
 //console.log(num_grid);
 
 function createGrid(grid){
     let each_width = w / grid;
-    let each_height = (h) / grid;
-    console.log(each_height)
+    let each_height = h / grid;
+    // console.log(each_height)
     opacity_flag = false;
     // console.log(each_width);
 
@@ -45,10 +86,11 @@ function createGrid(grid){
         // solution was to get rid of row
         row.classList.add('row')
         // without this, there is a space between each row
+        // and container changes dynamically according to number of rows
         row.style.height = `${each_height}px`;
         //row.textContent = 'row';
         //row.style.color = 'magenta'
-        const g = document.querySelector('.container')
+        const container = document.querySelector('.container')
         // row takes only 151 px
         // row.style.width = `${each_width}px`;
 
@@ -63,10 +105,11 @@ function createGrid(grid){
             //col.style.color = 'magenta';
             
             row.appendChild(col);
-            g.appendChild(row);
+            container.appendChild(row);
     
         }
     }
+    // draw each coloum
     const each_col = document.querySelectorAll('.col');
     for (let i = 0; i < each_col.length; i++){
         each_col[i].addEventListener('mouseover', (e) => {
@@ -75,7 +118,7 @@ function createGrid(grid){
             if (opacity_flag){
                 each_col[i].style.opacity = 0.1;
             } else{
-                each_col[i].style.backgroundColor = '#225906';
+                each_col[i].style.backgroundColor = selectedColor;
             }
         });
     }
@@ -103,7 +146,7 @@ function createGrid(grid){
     // console.log(reset)
     opacity.addEventListener('click',(e) => {
             opacity_flag = (opacity_flag) ? false : true;
-        });
+    });
     
     
     /*
