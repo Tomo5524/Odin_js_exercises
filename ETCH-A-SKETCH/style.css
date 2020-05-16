@@ -1,20 +1,31 @@
 body{
-    background-color: cornflowerblue;
+    /*background-color: cornflowerblue;*/
+    background-image: url('../afe5a3847fefe31c19fd83b5e8164dbcf4e5b130_yosemite-8.jpg');
+    background-repeat: no-repeat;
+    /*the background image will stretch to cover the entire content area
+    https://www.w3schools.com/css/css_rwd_images.asp*/ 
+    background-size: 100% 100%;
 }
 
+/* background image */
 .container{
-    
-    width: 750px;
+    padding-top: 100px;
+    width: 500px;
+    height:960px;
     margin: 0 auto;
-    
 }
 
 .menu{
     display:inline-block;
+    float: right;
     padding: 0 10px;
 }
 
-#reset{
+button{
+    margin: 10px;
+}
+
+#select{
     margin: 10px;
 }
 
@@ -28,14 +39,19 @@ div {
     text-align:center;
     background-color: chocolate;
     color:black;
-    
+    /*max-height: 100%;*/
 }
 
 .row{
-    width: auto;
-    
-    background-color: cornflowerblue;
-    color:black;
-    
+    /*width: auto;*/
+    /*background-color: cornflowerblue;*/
+    /*color:black;*/
+    border: 1px;
+}
+
+#dropdown-content{
+    font-size: 18px;
+    padding-right: 5px;
+    font-style: italic;
 }
 
